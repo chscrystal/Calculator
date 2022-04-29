@@ -1,0 +1,21 @@
+#keys {
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    margin: auto;
+}
+
+#display {
+    width: 500px;
+    height: 125px;
+    border: 1px solid black;
+    margin: auto;
+    font-size: 60px;
+    text-align: right;
+}
+
+button {
+    font-size: 30px;
+}
