@@ -64,13 +64,23 @@ function runOperation(e){
     console.log(operatorList)
 
     while (numArr.length>1) {
-    num1 = Number(numArr[0]);
-    num2 = Number(numArr[1]);
-    const newNum = operate(num1,operatorList[0],num2);
-    numArr.splice(0,2,newNum);
-    operatorList.shift();
-    console.log(numArr)
-    console.log(operatorList)
+        while(operatorList.indexOf('*')>=0|operatorList.indexOf('/')>=0){
+            const multidiviIndex = operatorList.findIndex(symbol => /[*]|[/]/.test(symbol));
+            console.log(multidiviIndex);
+            num1 = Number(numArr[multidiviIndex]);
+            num2 = Number(numArr[multidiviIndex+1]);
+            const newNum = operate(num1,operatorList[multidiviIndex],num2);
+            numArr.splice(multidiviIndex,2,newNum);
+            operatorList.splice(multidiviIndex,1);
+            console.log(numArr)
+            console.log(operatorList)
+        }
+      
+        num1 = Number(numArr[0]);
+        num2 = Number(numArr[1]);
+        const newNum = operate(num1,operatorList[0],num2);
+        numArr.splice(0,2,newNum);
+        operatorList.splice(0,1);
     }
 
    display.innerText = numArr[0];
