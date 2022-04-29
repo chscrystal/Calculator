@@ -57,12 +57,23 @@ equalButton.addEventListener('click',runOperation);
 function runOperation(e){
     const numEntered = display.innerText;
     console.log(numEntered);
-    const operatorRegex = /[+]|[-]|[*]|[/]/;
-    num1 = Number(numEntered.split(operatorRegex)[0]);
-    num2 = Number(numEntered.split(operatorRegex)[1]);
-    operator = numEntered.match(operatorRegex);
+    const operatorRegex = /[+]+|[-]+|[*]+|[/]+/g;
+    const numArr = numEntered.split(operatorRegex);
+    console.log(numArr);
+    const operatorList = numEntered.match(operatorRegex);
+    console.log(operatorList)
 
-   display.innerText = operate(num1,...operator,num2);
+    while (numArr.length>1) {
+    num1 = Number(numArr[0]);
+    num2 = Number(numArr[1]);
+    const newNum = operate(num1,operatorList[0],num2);
+    numArr.splice(0,2,newNum);
+    operatorList.shift();
+    console.log(numArr)
+    console.log(operatorList)
+    }
+
+   display.innerText = numArr[0];
 }
 
 
