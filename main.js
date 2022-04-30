@@ -13,7 +13,9 @@ function multiply(num1,num2){
 }
 
 function divide(num1,num2){
-    return num1/num2;
+    if(num2==0){
+        return 'lmao';
+    } return num1/num2;
 }
 
 
@@ -37,9 +39,27 @@ digit.forEach(button=>button.addEventListener('click',displayEvent));
 const display = document.querySelector('p');
 
 function displayEvent(e){
-    display.innerText += this.id;    
+    if(display.innerText === '0' && this.id !== '.'){
+        display.innerText = this.id;
+    } else display.innerText += this.id;  
+
+    if(display.innerText.length>16){
+        display.innerText = display.innerText.substring(0,16);
+    }  
 }
 
+
+// Decimal Event
+const decimalButton = document.getElementById('.');
+decimalButton.addEventListener('click', decimalEvent);
+
+function decimalEvent(e){
+
+    if(display.innerText.indexOf('.')== -1){
+        display.innerText += '.';
+    }
+
+}
 
 // Clear Event
 const clear = document.querySelector('#C');
@@ -49,9 +69,17 @@ function clearEvent(e){
     display.innerText = display.innerText.slice(0,-1);    
 }
 
+// All Clear Event
+const allClear = document.querySelector('#AC');
+allClear.addEventListener('click',allclearEvent);
+
+function allclearEvent(e){
+    display.innerText = 0;
+}
 
 
-const equalButton = document.getElementById('=');
+// Calculation
+const equalButton = document.getElementById('equal');
 equalButton.addEventListener('click',runOperation);
 
 function runOperation(e){
@@ -83,7 +111,9 @@ function runOperation(e){
             operatorList.splice(0,1);
         }
     }
-
+   if(numArr[0].toString().length>16){
+       numArr[0] = Number(numArr[0].toString().substring(0,16));
+   }
    display.innerText = numArr[0];
 }
 
